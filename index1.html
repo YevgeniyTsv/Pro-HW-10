@@ -1,0 +1,157 @@
+<html>
+
+<head>
+  <title>JAVASCRIPT HW3</title>
+</head>
+
+<body>
+  <script>
+    // ЗАДАНИЯ ДЛЯ РАЗМИНКИ!!!!!!)))
+
+    let taskNumber = 0;
+
+    //1) Есть функция a! Пояснить почему при вызове функции b возьмется k из функции b! Ну и предложить решение чтобы брать k которое выше!
+    console.warn(`Task # ${++taskNumber}`);
+
+    function a(arg) {
+      let k = 10;
+
+      function b() {
+        let k = 20;
+        return k;
+      }
+      const res = b() + arg;
+      return res;
+    }
+    console.log(`  Брется k из функции b по причине того, что k - первая переменная, 
+  встречающаяся на пути в скоупе. Для того чтоб бралась k из a, 
+  она должна быть 1-я переменная k, которая встретися, следовательно 
+  из функции b k нужно убрать`);
+
+
+    //2) Написать функцию которая принимает параметр num и вовращает новую функцию которая тоже принимет один параметр возвращает произведение!
+    // то num нужно замкнуть! 
+    console.warn(`Task # ${++taskNumber}`);
+
+    function a(num) {
+      var num;
+      return function (num2) {
+        return num * num2;
+      }
+    }
+    const res = a(5);
+    console.log(`  Произведение 5 * 10 = ${res(10)}`); // 50
+
+
+    // 3) Есть функция counter!Пояснить почему res1, res2 берут разные i с замыкания!
+    console.warn(`Task # ${++taskNumber}`);
+
+    function counter() {
+      var i = 1;
+
+      return function () { // (**)
+        return i++;
+      };
+    }
+    const res1 = counter();
+    res1();
+    res1();
+    const res2 = counter();
+    res2();
+    res2();
+
+    console.log(`  res1 b res2 берут разные i из замыкания по той причине, что 
+  при создании переменной каждый раз берется чистая переменная i`);
+
+    //4) Есть функция с которую мы разбирали! Нужно переопредлить toString f чтобы не обращатся к свойству k, а после нажатия enter выводило результат!
+    console.warn(`Task # ${++taskNumber}`);
+
+    function c(num) {
+      f.k = 0;
+
+      function f(num1) {
+        f.k += f.k ? num : num + num1;
+        return f;
+      }
+      return f;
+    }
+    // с(5)(6)(1).k; // таким образом мы получали k которое хранит сумму!!
+    // с(5)(6)(5); // нужно чтобы в консоле показало не тело функции а результат то есть ну/но переопределить toString
+
+    // 5) Разомнем мозги пишем собственный reduce! 
+    console.warn(`Task # ${++taskNumber}`);
+
+    function reduce(array, f) {
+      // your code
+    }
+    // some([5, 2, 5, 1, 6, 3, 6], (prev, curr) => prev + curr);
+
+
+
+
+    // 6) Взял задачу с нета! Обьяснить почему первая выведет 10, а 2 остальные 0!
+
+    console.warn(`Task # ${++taskNumber}`);
+
+
+    /*1)*/
+    function arrOfFunctions() {
+
+      var functions = [];
+
+      for (var i = 0; i < 10; i++) {
+        var f = function () { // функция-стрелок
+          alert(i); // выводит свой номер
+        };
+        functions.push(f);
+      }
+
+      return functions;
+    }
+
+    var res3 = arrOfFunctions();
+
+    res3[0](); // стрелок выводит 10, а должен 0
+    /*2*/
+    function arrOfFunctions() {
+
+      var functions = [];
+
+      for (var i = 0; i < 10; i++) {
+        (function (i) {
+          var f = function () {
+            alert(i);
+          };
+          functions.push(f);
+        })(i);
+      }
+
+      return functions;
+    }
+
+    var res4 = arrOfFunctions();
+
+    res4[0]()
+
+    /*3*/
+    function arrOfFunctions() {
+
+      var functions = [];
+
+      for (let i = 0; i < 10; i++) {
+        var f = function () {
+          alert(i);
+        };
+        functions.push(f);
+      }
+
+      return functions;
+    }
+
+    var res5 = arrOfFunctions();
+
+    res5[0]();
+  </script>
+</body>
+
+</html>
