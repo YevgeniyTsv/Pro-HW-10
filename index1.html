@@ -81,10 +81,16 @@
     // 5) Разомнем мозги пишем собственный reduce! 
     console.warn(`Task # ${++taskNumber}`);
 
-    function reduce(array, f) {
-      // your code
+   function reduce(array, f, initial) {
+      let acc = initial === undefined ? array[0] : initial,
+        arrLength = array.length;
+      for (let i = initial === undefined ? 1 : 0; i < arrLength; i++) {
+        acc = f(acc, array[i], i, array);
+      };
+      return acc;
     }
-    // some([5, 2, 5, 1, 6, 3, 6], (prev, curr) => prev + curr);
+
+    console.log(reduce([5, 2, 5, 1, 6, 3, 6], (prev, curr) => prev + curr));
 
 
 
