@@ -1,7 +1,7 @@
 <html>
 
 <head>
-  <title>JAVASCRIPT HW3</title>
+  <title>JAVASCRIPT HW10</title>
 </head>
 
 <body>
@@ -23,10 +23,10 @@
       const res = b() + arg;
       return res;
     }
-    console.log(`  Брется k из функции b по причине того, что k - первая переменная, 
+    console.log(`  Берется k из функции b по причине того, что k - первая переменная, 
   встречающаяся на пути в скоупе. Для того чтоб бралась k из a, 
   она должна быть 1-я переменная k, которая встретися, следовательно 
-  из функции b k нужно убрать`);
+  из функции b k нужно убрать либо убрать у k let`);
 
 
     //2) Написать функцию которая принимает параметр num и вовращает новую функцию которая тоже принимет один параметр возвращает произведение!
@@ -73,15 +73,21 @@
         f.k += f.k ? num : num + num1;
         return f;
       }
+      f.toString = function () {
+        return this.k;
+      }
       return f;
     }
+
     // с(5)(6)(1).k; // таким образом мы получали k которое хранит сумму!!
     // с(5)(6)(5); // нужно чтобы в консоле показало не тело функции а результат то есть ну/но переопределить toString
+    console.log(`${c(5)(6)(5)}`);
+
+
 
     // 5) Разомнем мозги пишем собственный reduce! 
     console.warn(`Task # ${++taskNumber}`);
-
-   function reduce(array, f, initial) {
+    function reduce(array, f, initial) {
       let acc = initial === undefined ? array[0] : initial,
         arrLength = array.length;
       for (let i = initial === undefined ? 1 : 0; i < arrLength; i++) {
@@ -95,6 +101,7 @@
 
 
 
+
     // 6) Взял задачу с нета! Обьяснить почему первая выведет 10, а 2 остальные 0!
 
     console.warn(`Task # ${++taskNumber}`);
@@ -102,27 +109,26 @@
 
     /*1)*/
     function arrOfFunctions() {
-
       var functions = [];
-
       for (var i = 0; i < 10; i++) {
         var f = function () { // функция-стрелок
           alert(i); // выводит свой номер
         };
         functions.push(f);
       }
-
       return functions;
     }
-
     var res3 = arrOfFunctions();
-
     res3[0](); // стрелок выводит 10, а должен 0
+
+    console.log(`в функции f нет переменной i, следовательно, функции, для того чтоб вызвать алерт приходится искать i
+ и обращаться выше по скоупу и обращаться к родителькой функции. А так как var не блойчный в отличии от let
+ то будет возвращаться последнее значение, приобретенное в конце цикла, следовательно 10`);
+
+
     /*2*/
     function arrOfFunctions() {
-
       var functions = [];
-
       for (var i = 0; i < 10; i++) {
         (function (i) {
           var f = function () {
@@ -131,13 +137,14 @@
           functions.push(f);
         })(i);
       }
-
       return functions;
     }
-
     var res4 = arrOfFunctions();
-
     res4[0]()
+
+    console.log(`В этом примере создана дополнителььная фунция (самовызыв. функция), 
+    которая на каждой итерации будет хранить значение
+    тоесть числа будут выводиться по порядку`);
 
     /*3*/
     function arrOfFunctions() {
@@ -157,6 +164,12 @@
     var res5 = arrOfFunctions();
 
     res5[0]();
+
+    console.log(`На каждой итерации берется новое значение i так как 
+    let блочный в отличае от var i видна в блоке, 
+    а на каждой итерации создается новый блок. i менятся не будет`);
+
+
   </script>
 </body>
 
